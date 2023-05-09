@@ -62,7 +62,7 @@ describe('Functional Test cases - API CRUD Operations', () => {
 
   it('Delete the user details', () => {
 
-    cy.request('DELETE', `${usersEndpoint}${Id}`, {}).then((response) => {
+    cy.request('DELETE', `${usersEndpoint}${Id}`).then((response) => {
 
       // The resource is deleted successfully
       expect(response.status).to.eq(204);
