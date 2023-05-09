@@ -1,0 +1,6 @@
+{
+  "userPage2": "/api/users?page=2",
+  "NextPage": "/api/users/2",
+  "usersEndpoint": "/api/users/",
+  "createPostRequest": "/api/users"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "api-testing-framework-yolo",
+  "version": "1.0.0",
+  "description": "create crud examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "open:window": "npx cypress open",
+    "run:headless:functional": "npx cypress run --headless --spec cypress/e2e/Functional",
+    "run:headless:non-functional": "npx cypress run --headless --spec cypress/e2e/Non-Functional"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.17.1",
+    "cypress": "^12.11.0",
+    "cypress-audit": "^1.1.0"
+  },
+  "dependencies": {
+    "cypress-mochawesome-reporter": "^3.4.0"
+  }
+}
