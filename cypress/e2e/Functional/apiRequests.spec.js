@@ -1,6 +1,6 @@
 /// <reference types = "Cypress"/>
 import { Name, Number } from "../../fixtures/helpers/randomNameGenerator"
-import { createPostRequest, usersEndpoint, NextPage } from "../../fixtures/endpoints.json"
+import { createPostRequest, usersEndpoint, NextPage, getRequest } from "../../fixtures/endpoints.json"
 
 const bodyDetails = {
   "name": `Name ${Name} ${Name}`,
@@ -33,7 +33,7 @@ describe('Functional Test cases - API CRUD Operations', () => {
 
   it('Retrieve the created or existing user details', () => {
 
-    cy.request('GET', `${NextPage}`).then((response) => {
+    cy.request('GET', `${getRequest}`).then((response) => {
 
       // Assert API's - status
       expect(response.status).to.eq(200);
@@ -51,15 +51,35 @@ describe('Functional Test cases - API CRUD Operations', () => {
       expect(response.body.job).to.eq(bodyDetailsUpdated.job)
     })
 
+    // Verify using GET request the resource is updated with status 200.
+
+    cy.request('GET', `${getRequest}`).then((response) => {
+
+      // Assert API's - status
+      expect(response.status).to.eq(200);
+    })
   })
 
   it('Delete the user details', () => {
 
-    cy.request('DELETE', `${usersEndpoint}${Id}`).then((response) => {
+    cy.request('DELETE', `${usersEndpoint}${Id}`, {}).then((response) => {
 
       // The resource is deleted successfully
       expect(response.status).to.eq(204);
     })
+
+    // Verify the resource is deleted and is not retrievable.
+    cy.request({
+      method: 'GET',
+      url: `${usersEndpoint}${Id}`,
+      failOnStatusCode: false
+    }).then((getResponse) => {
+
+      //Assert the request is failing because the resource is being deleted.
+      expect(getResponse.status).to.equal(404);
+    });
+
+
 
   })
 
